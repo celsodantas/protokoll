@@ -20,7 +20,7 @@ Really easy to use:
 
     Time.local(2012)
 
-	call3 = Call.create
+    call3 = Call.create
     call3.registry_number
     => 201200001			# restarts counter because if the first item of the year
 
