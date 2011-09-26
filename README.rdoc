@@ -1,3 +1,43 @@
 = ProtokollPlugin
 
-This project rocks and uses MIT-LICENSE.
+Protokoll is a simple Rails pluggin to simplify the management of a custom autoincrement value for a model. 
+
+Really easy to use:
+
+    # creating an autoincrement column based on Time
+    class Call < ActiveRecord::Base
+        protokoll :registry_number, :pattern => "%y#####"
+    end
+    
+    Time.local(2011)
+    call1 = Call.create
+    call1.registry_number
+    => 201100001
+
+    call2 = Call.create
+    call2.registry_number
+    => 201100002
+
+    Time.local(2012)
+
+	call3 = Call.create
+    call3.registry_number
+    => 201200001			# restarts counter because if the first item of the year
+
+You can use:
+ "%y" for year
+ "%m" for month
+ "%d" for day
+ "%H" for hour
+ "%M" for minute
+ "#"  for the autoincrement number (use and long as you want)
+
+And you can use any pattern you want:
+
+    protokoll :your_column, :pattern => "%y#####"    =>  "201100001", "201100002"
+
+    Time.local(2011, 1, 1, 12, 15)
+    protokoll :your_column, :pattern => "%H%M#####"  =>  "121500001", "121500001"
+
+
+This piece of software is free to use.
