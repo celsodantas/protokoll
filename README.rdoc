@@ -1,4 +1,4 @@
-= ProtokollPlugin
+= Protokoll
 
 Protokoll is a simple Rails pluggin to simplify the management of a custom autoincrement value for a model. 
 
