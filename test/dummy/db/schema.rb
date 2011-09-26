@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20110923101536) do
 
   create_table "principals", :force => true do |t|
-    t.string   "number_format"
+    t.string   "protokoll_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

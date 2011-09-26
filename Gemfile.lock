@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    protocol_number_plugin (0.0.1)
+    protokoll_plugin (0.0.1)
       rails (~> 3.1.0)
 
 GEM
@@ -106,7 +106,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  protocol_number_plugin!
+  protokoll_plugin!
   ruby-debug19
   sqlite3
   timecop

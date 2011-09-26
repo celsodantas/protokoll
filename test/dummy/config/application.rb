@@ -3,7 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require
-require "protocol_number_plugin"
+require "protokoll_plugin"
 
 module Dummy
   class Application < Rails::Application

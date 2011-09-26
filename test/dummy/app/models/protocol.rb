@@ -1,3 +1,3 @@
 class Protocol < ActiveRecord::Base
-  protocol_number :number, :format => Principal
+  protokoll :number, :pattern => Principal
 end
