@@ -27,17 +27,20 @@ module ProtokollPlugin
     def protokoll(column, _options = {})
       options = { :pattern => "%Y%m#####", :number_symbol => "#"}
       options.merge!(_options)
-      
-      @@protokoll_auto_increment = ProtokollAutoIncrement.new
-      @@protokoll_auto_increment.options = options
-      
-      if self.count > 0
-        @@protokoll_count = ExtractNumber.number(self.last[column], options[:pattern]) 
-      end
-      
-      before_create do |record|
+
+      before_save do |record|      
+        @@protokoll_auto_increment = ProtokollAutoIncrement.new
+        @@protokoll_auto_increment.options = options
+
         last = record.class.last
-        @@protokoll_count = 0 if last.present? and @@protokoll_auto_increment.outdated?(last)
+        
+        if last.present?
+          if @@protokoll_auto_increment.outdated?(last)
+            @@protokoll_count = 0 
+          else
+            @@protokoll_count = ExtractNumber.number(last[column], options[:pattern]) 
+          end
+        end
         
         @@protokoll_count += 1
         record[column] = @@protokoll_auto_increment.next_custom_number(column, @@protokoll_count)
