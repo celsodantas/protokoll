@@ -32,7 +32,7 @@ module ProtokollPlugin
       @@protokoll_auto_increment.options = options
       
       if self.count > 0
-        @@protokoll_count = ExtractNumber.number(self.class.last[column], pattern) 
+        @@protokoll_count = ExtractNumber.number(self.last[column], options[:pattern]) 
       end
       
       before_create do |record|
