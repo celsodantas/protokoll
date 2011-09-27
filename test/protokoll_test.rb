@@ -6,18 +6,18 @@ class ProtokollTest < ActiveSupport::TestCase
     time = Time.local(2011, 9, 25, 12, 0, 0)
     Timecop.travel(time)
     
-    Protocol.protokoll_count = 0
+    Protocol.protokoll.count = 0
   end
   
   test "first using # should get 1" do
-     Protocol.protokoll_pattern = "#"
+     Protocol.protokoll.pattern = "#"
   
      protocol = Protocol.create
      assert_equal "1", protocol.number
   end
   
   test "second protocol on DB should have number should equals 2" do
-    Protocol.protokoll_pattern = "#"
+    Protocol.protokoll.pattern = "#"
     
     Protocol.create
     protocol = Protocol.create
@@ -25,7 +25,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
   
   test "third protocol on DB should have number should equals 3" do
-    Protocol.protokoll_pattern = "#"
+    Protocol.protokoll.pattern = "#"
 
     protocol1 = Protocol.create
     protocol2 = Protocol.create
@@ -34,14 +34,14 @@ class ProtokollTest < ActiveSupport::TestCase
   end
     
   test "first using format A# should get A1" do
-    Protocol.protokoll_pattern = "A#"
+    Protocol.protokoll.pattern = "A#"
 
     protocol1 = Protocol.create
     assert_equal "A1", protocol1.number
   end
   
   test "second using format A# should get A2" do
-    Protocol.protokoll_pattern = "A#"
+    Protocol.protokoll.pattern = "A#"
 
     protocol1 = Protocol.create
     protocol2 = Protocol.create
@@ -49,14 +49,14 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "first using format A## should get A01" do
-    Protocol.protokoll_pattern = "A##"
+    Protocol.protokoll.pattern = "A##"
 
     protocol1 = Protocol.create
     assert_equal "A01", protocol1.number
   end
 
   test "second using format A## should get A02" do
-    Protocol.protokoll_pattern = "A##"
+    Protocol.protokoll.pattern = "A##"
 
     protocol1 = Protocol.create
     protocol2 = Protocol.create
@@ -64,7 +64,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "third using format A## should get A03" do
-    Protocol.protokoll_pattern = "A##"
+    Protocol.protokoll.pattern = "A##"
 
     protocol1 = Protocol.create
     protocol2 = Protocol.create
@@ -73,28 +73,28 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "first use of %y# should get 111" do
-    Protocol.protokoll_pattern = "%y#"
+    Protocol.protokoll.pattern = "%y#"
 
     protocol1 = Protocol.create
     assert_equal "111", protocol1.number
   end
 
   test "second use of %y## should get 1101" do
-    Protocol.protokoll_pattern = "%y##"
+    Protocol.protokoll.pattern = "%y##"
 
     protocol1 = Protocol.create
     assert_equal "1101", protocol1.number
   end
 
   test "first use of %y%m## should get 110901" do
-    Protocol.protokoll_pattern = "%y%m##"
+    Protocol.protokoll.pattern = "%y%m##"
 
     protocol1 = Protocol.create
     assert_equal "110901", protocol1.number
   end
 
   test "second use of %y%m## on next month after should get 111001" do
-    Protocol.protokoll_pattern = "%y%m##"
+    Protocol.protokoll.pattern = "%y%m##"
 
     protocol1 = Protocol.create
 
@@ -106,7 +106,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "%y%m%H#### should get 1109120001" do
-    Protocol.protokoll_pattern = "%y%m%H####"
+    Protocol.protokoll.pattern = "%y%m%H####"
 
     protocol1 = Protocol.create
 
@@ -114,7 +114,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "%y## on next year should get 1201" do
-    Protocol.protokoll_pattern = "%y##"
+    Protocol.protokoll.pattern = "%y##"
 
     protocol1 = Protocol.create
     time = Time.local(2012, 9, 25, 12, 3, 0)
@@ -126,7 +126,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "500.time create using %y%m%H#### should get 1109120500" do
-    Protocol.protokoll_pattern = "%y%m%H####"
+    Protocol.protokoll.pattern = "%y%m%H####"
 
     500.times { Protocol.create }
 
@@ -134,7 +134,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "PROT%H%m%y#### should get PROT%H%m%y0001" do
-    Protocol.protokoll_pattern = "PROT%H%m%y####"
+    Protocol.protokoll.pattern = "PROT%H%m%y####"
 
     protocol1 = Protocol.create
 
@@ -142,7 +142,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "PROT%Y%m%H#### should get PROT201109120001" do
-    Protocol.protokoll_pattern = "PROT%Y%m%H####"
+    Protocol.protokoll.pattern = "PROT%Y%m%H####"
 
     protocol1 = Protocol.create
 
@@ -150,7 +150,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "use of sufix ####PROTO should get 0001PROTO" do
-    Protocol.protokoll_pattern = "####PROTO"
+    Protocol.protokoll.pattern = "####PROTO"
 
     protocol1 = Protocol.create
 
@@ -158,7 +158,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "use of sufix %Y%M####PROTO on 12:03 should get 2011030001PROTO" do
-    Protocol.protokoll_pattern = "%Y%M####PROTO"
+    Protocol.protokoll.pattern = "%Y%M####PROTO"
 
     time = Time.local(2011, 9, 25, 12, 3, 0)
     Timecop.travel(time)
@@ -169,7 +169,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
 
   test "use of sufix %Y%M####PROTO on 12:15 should get 2011150001PROTO" do
-    Protocol.protokoll_pattern = "%Y%M####PROTO"
+    Protocol.protokoll.pattern = "%Y%M####PROTO"
 
     time = Time.local(2011, 9, 25, 12, 15, 0)
     Timecop.travel(time)
@@ -180,7 +180,7 @@ class ProtokollTest < ActiveSupport::TestCase
   end
   
   # test "Start application with populated db." do  
-  #   Protocol.protokoll_pattern = "%Y%M####PROTO"
+  #   Protocol.protokoll.pattern = "%Y%M####PROTO"
   # 
   #   Protocol.create
   #   Protocol.create

@@ -1,7 +1,20 @@
 module Protokoll
 
-  class ProtokollAutoIncrement    
+  class AutoIncrement    
     attr_accessor :options
+    attr_accessor :count
+    
+    def initialize
+      @count = 0
+    end
+    
+    def pattern=(p)
+      options[:pattern] = p
+    end
+    
+    def pattern
+      options[:pattern]
+    end
     
     def next_custom_number(column, number)
       prefix(options[:pattern]).to_s + 

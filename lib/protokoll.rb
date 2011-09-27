@@ -1,49 +1,38 @@
-require "protokoll/protokoll_auto_increment"
+require "protokoll/auto_increment"
 require "protokoll/extract_number"
 
 module Protokoll
   extend ActiveSupport::Concern
   
   module ClassMethods
-    @@protokoll_count = 0
-    @@protokoll_auto_increment 
-
-    def protokoll_count=(p)
-      @@protokoll_count = p
+    @@protokoll = nil
+    
+    def protokoll
+      @@protokoll
     end
     
-    def protokoll_count
-      @@protokoll_count
-    end
-    
-    def protokoll_pattern=(p)
-      @@protokoll_auto_increment.options[:pattern] = p
-    end
-    
-    def protokoll_pattern
-      @@protokoll_auto_increment.options[:pattern]
-    end
-    
-    def protokoll(column, _options = {})
+    def protokoll(column = nil, _options = {})
+      @@protokoll = AutoIncrement.new  if @@protokoll.nil?
+      return @@protokoll if column.nil? 
+      
       options = { :pattern => "%Y%m#####", :number_symbol => "#"}
       options.merge!(_options)
 
-      @@protokoll_auto_increment = ProtokollAutoIncrement.new
-      @@protokoll_auto_increment.options = options
-
+      @@protokoll.options = options          
+    
       before_save do |record|      
         last = record.class.last
         
         if last.present?
-          if @@protokoll_auto_increment.outdated?(last)
-            @@protokoll_count = 0 
+          if @@protokoll.outdated?(last)
+            @@protokoll.count = 0 
           else
-            @@protokoll_count = ExtractNumber.number(last[column], options[:pattern]) 
+            @@protokoll.count = ExtractNumber.number(last[column], options[:pattern]) 
           end
         end
         
-        @@protokoll_count += 1
-        record[column] = @@protokoll_auto_increment.next_custom_number(column, @@protokoll_count)
+        @@protokoll.count += 1
+        record[column] = @@protokoll.next_custom_number(column, @@protokoll.count)
       end
     end
   end
