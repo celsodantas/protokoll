@@ -64,6 +64,9 @@ Ex:
     end
     
    # will produce => "2011HOUSE00001", "2011HOUSE00002"...
-__
+
+== Questions & Sugestions
+This is my _first_ public gem, so if you have any questions os sugestions, feel free to contact me (use github msg system for that). It will be awesome to hear feedback to improve the code.
+
 
 This piece of software is free to use.
