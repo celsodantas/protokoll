@@ -7,10 +7,10 @@ require "protokoll_plugin/version"
 Gem::Specification.new do |s|
   s.name        = "protokoll_plugin"
   s.version     = ProtokollPlugin::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ProtokollPlugin."
+  s.authors     = ["Celso Dantas"]
+  s.email       = ["celsodantas@gmail.com"]
+  s.homepage    = "https://github.com/celsodantas/protokoll"
+  s.summary     = "A simple Rails gem to create custom autoincrement values to a database column"
   s.description = "TODO: Description of ProtokollPlugin."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]

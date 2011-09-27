@@ -9,100 +9,174 @@ class ProtokollPluginTest < ActiveSupport::TestCase
     Protocol.protokoll_count = 0
   end
   
-  test "first protocol on DB should have number should equals 1" do
-    Principal.create!(:number_format => "#")
-
-    protocol = Protocol.create
-    assert_equal "1", protocol.number
+  test "first using # should get 1" do
+     Protocol.protokoll_pattern = "#"
+  
+     protocol = Protocol.create
+     assert_equal "1", protocol.number
   end
   
   test "second protocol on DB should have number should equals 2" do
-    Principal.create!(:number_format => "#")
+    Protocol.protokoll_pattern = "#"
     
-    protocol1 = Protocol.create
-    protocol2 = Protocol.create
-    assert_equal "2", protocol2.number
+    Protocol.create
+    protocol = Protocol.create
+    assert_equal "2", protocol.number
   end
   
   test "third protocol on DB should have number should equals 3" do
-    Principal.create!(:number_format => "#")
-    
+    Protocol.protokoll_pattern = "#"
+
     protocol1 = Protocol.create
     protocol2 = Protocol.create
     protocol3 = Protocol.create
     assert_equal "3", protocol3.number
   end
-  
+    
   test "first using format A# should get A1" do
-    Principal.create!(:number_format => "A#")
-  
+    Protocol.protokoll_pattern = "A#"
+
     protocol1 = Protocol.create
     assert_equal "A1", protocol1.number
   end
   
   test "second using format A# should get A2" do
-    Principal.create!(:number_format => "A#")
-  
+    Protocol.protokoll_pattern = "A#"
+
     protocol1 = Protocol.create
     protocol2 = Protocol.create
     assert_equal "A2", protocol2.number
   end
 
   test "first using format A## should get A01" do
-    Principal.create!(:number_format => "A##")
-  
+    Protocol.protokoll_pattern = "A##"
+
     protocol1 = Protocol.create
     assert_equal "A01", protocol1.number
   end
-  
+
   test "second using format A## should get A02" do
-    Principal.create!(:number_format => "A##")
-  
+    Protocol.protokoll_pattern = "A##"
+
     protocol1 = Protocol.create
     protocol2 = Protocol.create
     assert_equal "A02", protocol2.number
   end
-  
+
   test "third using format A## should get A03" do
-    Principal.create!(:number_format => "A##")
-  
+    Protocol.protokoll_pattern = "A##"
+
     protocol1 = Protocol.create
     protocol2 = Protocol.create
     protocol3 = Protocol.create
     assert_equal "A03", protocol3.number
   end
-  
+
   test "first use of %y# should get 111" do
-    Principal.create!(:number_format => "%y#")
-  
+    Protocol.protokoll_pattern = "%y#"
+
     protocol1 = Protocol.create
     assert_equal "111", protocol1.number
   end
-  
+
   test "second use of %y## should get 1101" do
-    Principal.create!(:number_format => "%y##")
-  
+    Protocol.protokoll_pattern = "%y##"
+
     protocol1 = Protocol.create
     assert_equal "1101", protocol1.number
   end
-  
+
   test "first use of %y%m## should get 110901" do
-    Principal.create!(:number_format => "%y%m##")
-  
+    Protocol.protokoll_pattern = "%y%m##"
+
     protocol1 = Protocol.create
     assert_equal "110901", protocol1.number
   end
-  
+
   test "second use of %y%m## on next month after should get 111001" do
-    Principal.create!(:number_format => "%y%m##")
-  
+    Protocol.protokoll_pattern = "%y%m##"
+
     protocol1 = Protocol.create
-    
+
     Timecop.travel(Time.now + 1.month)
-    
+
     protocol2 = Protocol.create
-    
-    assert_equal "111002", protocol2.number
+
+    assert_equal "111001", protocol2.number
+  end
+
+  test "%y%m%H#### should get 1109120001" do
+    Protocol.protokoll_pattern = "%y%m%H####"
+
+    protocol1 = Protocol.create
+
+    assert_equal "1109120001", protocol1.number
+  end
+
+  test "%y## on next year should get 1201" do
+    Protocol.protokoll_pattern = "%y##"
+
+    protocol1 = Protocol.create
+    time = Time.local(2012, 9, 25, 12, 3, 0)
+    Timecop.travel(time)
+
+    protocol2 = Protocol.create
+
+    assert_equal "1201", protocol2.number
+  end
+
+  test "500.time create using %y%m%H#### should get 1109120500" do
+    Protocol.protokoll_pattern = "%y%m%H####"
+
+    500.times { Protocol.create }
+
+    assert_equal "1109120500", Protocol.last.number
+  end
+
+  test "PROT%H%m%y#### should get PROT%H%m%y0001" do
+    Protocol.protokoll_pattern = "PROT%H%m%y####"
+
+    protocol1 = Protocol.create
+
+    assert_equal "PROT1209110001", protocol1.number
+  end
+
+  test "PROT%Y%m%H#### should get PROT201109120001" do
+    Protocol.protokoll_pattern = "PROT%Y%m%H####"
+
+    protocol1 = Protocol.create
+
+    assert_equal "PROT201109120001", protocol1.number
+  end
+
+  test "use of sufix ####PROTO should get 0001PROTO" do
+    Protocol.protokoll_pattern = "####PROTO"
+
+    protocol1 = Protocol.create
+
+    assert_equal "0001PROTO", protocol1.number
+  end
+
+  test "use of sufix %Y%M####PROTO on 12:03 should get 2011030001PROTO" do
+    Protocol.protokoll_pattern = "%Y%M####PROTO"
+
+    time = Time.local(2011, 9, 25, 12, 3, 0)
+    Timecop.travel(time)
+
+    protocol1 = Protocol.create
+
+    assert_equal "2011030001PROTO", protocol1.number
+  end
+
+  test "use of sufix %Y%M####PROTO on 12:15 should get 2011150001PROTO" do
+    Protocol.protokoll_pattern = "%Y%M####PROTO"
+
+    time = Time.local(2011, 9, 25, 12, 15, 0)
+    Timecop.travel(time)
+
+    protocol1 = Protocol.create
+
+    assert_equal "2011150001PROTO", protocol1.number
   end
 end
 
