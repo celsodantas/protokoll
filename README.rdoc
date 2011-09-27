@@ -26,20 +26,20 @@ All those tricky things to control like every month you have to reset the counte
     call03.registry_number
     => "201200001"			# restarts counter because if the first item of the year
 
-If you want to use your own pattern just use like this:
+If you want to use your own pattern, just do this:
 
-	class Call < ActiveRecord::Base
-	    protokoll :registry_number, :pattern => "some#####thing"
-	end
-	
-	# this will produce
-	call01 = Call.create
-	call01.registry_number
-	=> "some00001thing"
-	
-	call02 = Call.create
-	call02.registry_number
-	=> "some00002thing"
+    class Call < ActiveRecord::Base
+        protokoll :registry_number, :pattern => "some#####thing"
+    end
+    
+    # this will produce
+    call01 = Call.create
+    call01.registry_number
+    => "some00001thing"
+    
+    call02 = Call.create
+    call02.registry_number
+    => "some00002thing"
 
 Or use any time based format. You can use in the pattern any combination of:
  # assume it's 2011/01/01 12:00
@@ -51,17 +51,17 @@ Or use any time based format. You can use in the pattern any combination of:
  "#"  for the autoincrement number (use and long as you want)
 
 Ex:
-	class Car < ActiveRecord::Base
-	    protokoll :number, :pattern => "CAR%y#####"
-	end
-	
-	# will produce => "CAR201100001", "CAR1100002"... 
-	
-	class House < ActiveRecord::Base
-	    protokoll :sell_number, :pattern => "%YHOUSE#####"
-	end
-	
-	# will produce => "2011HOUSE00001", "2011HOUSE00002"...
+    class Car < ActiveRecord::Base
+        protokoll :number, :pattern => "CAR%y#####"
+    end
+    
+    # will produce => "CAR201100001", "CAR1100002"... 
+    
+    class House < ActiveRecord::Base
+        protokoll :sell_number, :pattern => "%YHOUSE#####"
+    end
+    
+   # will produce => "2011HOUSE00001", "2011HOUSE00002"...
 __
 
 This piece of software is free to use.
