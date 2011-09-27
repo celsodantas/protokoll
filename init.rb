@@ -1,0 +1,1 @@
+require 'protokoll_plugin'

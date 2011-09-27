@@ -14,8 +14,12 @@ module ProtokollPlugin
     end
 
     def self.number(str, pattern)
-      mask = create_number_mask(pattern)
+      mask = create_number_mask( expand_pattern(pattern) )
       extract_using_mask(str, mask)
+    end
+    
+    def self.expand_pattern(pattern)
+      pattern.sub("%Y", "0000")
     end
   end
 end
