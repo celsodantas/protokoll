@@ -1,43 +1,67 @@
 = Protokoll
 
-Protokoll is a simple Rails pluggin to simplify the management of a custom autoincrement value for a model. 
+Protokoll is a simple Rails 3 pluggin to simplify the management of a custom autoincrement value for a model. 
 
-Really easy to use:
+If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you!
+
+All those tricky things to control like every month you have to reset the counter are gone! All you have to do is define a String column and let _Protokoll_ handle the rest:
 
     # creating an autoincrement column based on Time
     class Call < ActiveRecord::Base
-        protokoll :registry_number, :pattern => "%y#####"
+        protokoll :registry_number  # by default it uses "%Y%m#####"
     end
     
     Time.local(2011)
-    call1 = Call.create
-    call1.registry_number
-    => 201100001
+    call01 = Call.create
+    call01.registry_number
+    => "201100001"
 
-    call2 = Call.create
-    call2.registry_number
-    => 201100002
+    call02 = Call.create
+    call02.registry_number
+    => "201100002"
 
     Time.local(2012)
 
-    call3 = Call.create
-    call3.registry_number
-    => 201200001			# restarts counter because if the first item of the year
+    call03 = Call.create
+    call03.registry_number
+    => "201200001"			# restarts counter because if the first item of the year
 
-You can use:
- "%y" for year
- "%m" for month
- "%d" for day
- "%H" for hour
- "%M" for minute
+If you want to use your own pattern just use like this:
+
+	class Call < ActiveRecord::Base
+	    protokoll :registry_number, :pattern => "some#####thing"
+	end
+	
+	# this will produce
+	call01 = Call.create
+	call01.registry_number
+	=> "some00001thing"
+	
+	call02 = Call.create
+	call02.registry_number
+	=> "some00002thing"
+
+Or use any time based format. You can use in the pattern any combination of:
+ # assume it's 2011/01/01 12:00
+ "%y" for year   	# => appends 11 
+ "%m" for month  	# => appends 01
+ "%d" for day	 	# => appends 01
+ "%H" for hour	 	# => appends 12
+ "%M" for minute 	# => appends 00
  "#"  for the autoincrement number (use and long as you want)
 
-And you can use any pattern you want:
-
-    protokoll :your_column, :pattern => "%y#####"    =>  "201100001", "201100002"
-
-    Time.local(2011, 1, 1, 12, 15)
-    protokoll :your_column, :pattern => "%H%M#####"  =>  "121500001", "121500001"
-
+Ex:
+	class Car < ActiveRecord::Base
+	    protokoll :number, :pattern => "CAR%y#####"
+	end
+	
+	# will produce => "CAR201100001", "CAR1100002"... 
+	
+	class House < ActiveRecord::Base
+	    protokoll :sell_number, :pattern => "%YHOUSE#####"
+	end
+	
+	# will produce => "2011HOUSE00001", "2011HOUSE00002"...
+__
 
 This piece of software is free to use.
