@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ProtokollPluginTest < ActiveSupport::TestCase
+class ProtokollTest < ActiveSupport::TestCase
   
   def setup
     time = Time.local(2011, 9, 25, 12, 0, 0)

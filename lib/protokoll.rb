@@ -1,12 +1,12 @@
-require "protokoll_plugin/protokoll_auto_increment"
-require "protokoll_plugin/extract_number"
+require "protokoll/protokoll_auto_increment"
+require "protokoll/extract_number"
 
-module ProtokollPlugin
+module Protokoll
   extend ActiveSupport::Concern
   
   module ClassMethods
     @@protokoll_count = 0
-    @@protokoll_auto_increment
+    @@protokoll_auto_increment 
 
     def protokoll_count=(p)
       @@protokoll_count = p
@@ -28,10 +28,10 @@ module ProtokollPlugin
       options = { :pattern => "%Y%m#####", :number_symbol => "#"}
       options.merge!(_options)
 
-      before_save do |record|      
-        @@protokoll_auto_increment = ProtokollAutoIncrement.new
-        @@protokoll_auto_increment.options = options
+      @@protokoll_auto_increment = ProtokollAutoIncrement.new
+      @@protokoll_auto_increment.options = options
 
+      before_save do |record|      
         last = record.class.last
         
         if last.present?
@@ -50,4 +50,4 @@ module ProtokollPlugin
   
 end
 
-ActiveRecord::Base.send :include, ProtokollPlugin
+ActiveRecord::Base.send :include, Protokoll

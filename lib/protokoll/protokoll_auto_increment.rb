@@ -1,4 +1,4 @@
-module ProtokollPlugin
+module Protokoll
 
   class ProtokollAutoIncrement    
     attr_accessor :options

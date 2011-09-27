@@ -1,4 +1,4 @@
-module ProtokollPlugin
+module Protokoll
   module ExtractNumber
     def self.create_number_mask(format)
       format.split("").map do |i|
