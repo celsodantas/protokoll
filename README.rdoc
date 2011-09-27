@@ -51,12 +51,14 @@ Or use any time based format. You can use in the pattern any combination of:
  "#"  for the autoincrement number (use and long as you want)
 
 Ex:
+    # :number must be a String
     class Car < ActiveRecord::Base
         protokoll :number, :pattern => "CAR%y#####"
     end
     
     # will produce => "CAR201100001", "CAR1100002"... 
     
+    # :sell_number must be a String
     class House < ActiveRecord::Base
         protokoll :sell_number, :pattern => "%YHOUSE#####"
     end
