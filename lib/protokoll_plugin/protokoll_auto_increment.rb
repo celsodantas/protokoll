@@ -50,8 +50,6 @@ module ProtokollPlugin
       (pattern =~ /[#]+/ and $&).length
     end
 
-    
-
     def time_outdated?(pattern, record_date)
       if (pattern.include? "%y") # year
         return true if Time.now.year > record_date.year
@@ -72,25 +70,6 @@ module ProtokollPlugin
       if (pattern.include? "%M") # minute
         return true if Time.now.minute > record_date.min
       end
-    end
-
-    def create_number_mask(format)
-      format.split("").map do |i|
-        (i == "#") ? 1 : 0
-      end
-    end
-
-    def extract_using_mask(db_number, mask)
-      result = ""
-      db_number.split("").each_with_index do |n, i| 
-        result += n if mask[i] == 1
-      end
-      result.to_i
-    end
-
-    def last_record_number(record, pattern)
-      mask = create_number_mask(pattern)
-      extract_using_mask(record[column], mask)
     end
 
     def outdated?(record)

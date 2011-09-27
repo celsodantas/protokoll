@@ -178,6 +178,23 @@ class ProtokollPluginTest < ActiveSupport::TestCase
 
     assert_equal "2011150001PROTO", protocol1.number
   end
+  
+  # test "Start application with populated db." do  
+  #   Protocol.protokoll_pattern = "%Y%M####PROTO"
+  # 
+  #   Protocol.create
+  #   Protocol.create
+  #   Protocol.create
+  #   
+  #   # restart application
+  #   class << Protocol
+  #     remove_method :protokoll
+  #   end
+  #   
+  #   protocol = Protocol.create
+  # 
+  #   assert_equal "2011090004PROTO", protocol.number
+  # end
 end
 
 

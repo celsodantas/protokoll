@@ -1,4 +1,5 @@
 require "protokoll_plugin/protokoll_auto_increment"
+require "protokoll_plugin/extract_number"
 
 module ProtokollPlugin
   extend ActiveSupport::Concern
@@ -6,7 +7,7 @@ module ProtokollPlugin
   module ClassMethods
     @@protokoll_count = 0
     @@protokoll_auto_increment
-    
+
     def protokoll_count=(p)
       @@protokoll_count = p
     end
@@ -30,9 +31,9 @@ module ProtokollPlugin
       @@protokoll_auto_increment = ProtokollAutoIncrement.new
       @@protokoll_auto_increment.options = options
       
-      # if self.count > 0
-      #   @@protokoll_count = last_record_number(self.class.last, pattern) 
-      # end
+      if self.count > 0
+        @@protokoll_count = ExtractNumber.number(self.class.last[column], pattern) 
+      end
       
       before_create do |record|
         last = record.class.last
