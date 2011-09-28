@@ -3,16 +3,10 @@ require "protokoll/extract_number"
 
 module Protokoll
   extend ActiveSupport::Concern
-  
+
   module ClassMethods
-    @@protokoll = nil
-    
-    def protokoll
-      @@protokoll
-    end
-    
     def protokoll(column = nil, _options = {})
-      @@protokoll = AutoIncrement.new  if @@protokoll.nil?
+      @@protokoll ||= AutoIncrement.new
       return @@protokoll if column.nil? 
       
       options = { :pattern => "%Y%m#####", :number_symbol => "#"}
