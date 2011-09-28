@@ -56,7 +56,7 @@ Ex:
         protokoll :number, :pattern => "CAR%y#####"
     end
     
-    # will produce => "CAR201100001", "CAR1100002"... 
+    # will produce => "CAR1100001", "CAR1100002"... 
     
     # :sell_number must be a String
     class House < ActiveRecord::Base
