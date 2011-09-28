@@ -1,32 +1,35 @@
 require "protokoll/auto_increment"
 require "protokoll/extract_number"
+require "protokoll/class_variable"
 
 module Protokoll
   extend ActiveSupport::Concern
 
   module ClassMethods
     def protokoll(column = nil, _options = {})
-      @@protokoll ||= AutoIncrement.new
-      return @@protokoll if column.nil? 
+      ClassVariable.add_to self, :@@protokoll, :default => AutoIncrement.new
+      
+      prot = ClassVariable.get_from self, :@@protokoll
+      return prot if column.nil? 
       
       options = { :pattern => "%Y%m#####", :number_symbol => "#"}
       options.merge!(_options)
-
-      @@protokoll.options = options          
-    
+      
+      prot.options = options          
+          
       before_save do |record|      
         last = record.class.last
         
         if last.present?
-          if @@protokoll.outdated?(last)
-            @@protokoll.count = 0 
+          if prot.outdated?(last)
+            prot.count = 0 
           else
-            @@protokoll.count = ExtractNumber.number(last[column], options[:pattern]) 
+            prot.count = ExtractNumber.number(last[column], options[:pattern]) 
           end
         end
         
-        @@protokoll.count += 1
-        record[column] = @@protokoll.next_custom_number(column, @@protokoll.count)
+        prot.count += 1
+        record[column] = prot.next_custom_number(column, prot.count)
       end
     end
   end
