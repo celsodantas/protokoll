@@ -186,6 +186,16 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "2011150001PROTO", protocol1.number
   end
   
+  test "using 2 models" do
+    Protocol.protokoll.pattern = "%Y##"
+    Call.protokoll.pattern = "%Y##"
+    
+    protocol = Protocol.create
+    call = Call.create
+    assert_equal "201101", protocol.number
+    assert_equal "201101", call.number
+  end
+  
   ## Can't reproduce this on test environmet!
   ## if you know how to do that, contact-me!
   # test "Start application with populated db." do  
