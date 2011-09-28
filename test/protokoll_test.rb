@@ -9,11 +9,19 @@ class ProtokollTest < ActiveSupport::TestCase
     Protocol.protokoll.count = 0
   end
   
-  test "first using # should get 1" do
-     Protocol.protokoll.pattern = "#"
+  test "using new number_symbol with default pattern should get 20110900001" do
+    Protocol.protokoll.number_symbol = "$"
+    Protocol.protokoll.pattern = "%Y%m$$$$$"
+    
+    protocol1 = Protocol.create
+    assert_equal "20110900001", protocol1.number
+  end
   
-     protocol = Protocol.create
-     assert_equal "1", protocol.number
+  test "first using # should get 1" do
+    Protocol.protokoll.pattern = "#"
+     
+    protocol = Protocol.create
+    assert_equal "1", protocol.number
   end
   
   test "second protocol on DB should have number should equals 2" do

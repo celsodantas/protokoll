@@ -16,6 +16,14 @@ module Protokoll
       options[:pattern]
     end
     
+    def number_symbol=(s)
+      options[:number_symbol] = s
+    end
+    
+    def number_symbol
+      options[:number_symbol]
+    end
+    
     def next_custom_number(column, number)
       prefix(options[:pattern]).to_s + 
       counter(options[:pattern], number).to_s + 
@@ -42,12 +50,14 @@ module Protokoll
 
     def extract_prefix(pattern)
       # Company#### => Company
-      (pattern =~ /^(\s|\d)*[^#]+/ and $&)
+      symbol = options[:number_symbol]
+      (pattern =~ /^(\s|\d)*[^#{symbol}]+/ and $&)
     end
 
     def extract_sufix(pattern)
       # ###Company => Company
-      (pattern =~ /[^#]+$/ and $&)
+      symbol = options[:number_symbol]
+      (pattern =~ /[^#{symbol}]+$/ and $&)
     end
 
     def expand_times(pattern)
@@ -60,7 +70,8 @@ module Protokoll
     end
 
     def digits_size(pattern)
-      (pattern =~ /[#]+/ and $&).length
+      symbol = options[:number_symbol]
+      (pattern =~ /[#{symbol}]+/ and $&).length
     end
 
     def outdated?(record)
