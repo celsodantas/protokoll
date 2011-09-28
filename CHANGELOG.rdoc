@@ -1,0 +1,15 @@
+== v0.1.3
+* BUG FIX: If using %y%m and only year changes, counter was not restarting.
+
+== v0.1.2
+* Performance improvement
+* Refactoring 
+
+== v0.1.1  
+* Updating gem description
+
+== v0.1.0
+* Working!
+
+== v0.0.1
+* Initial code
