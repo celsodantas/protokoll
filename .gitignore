@@ -9,3 +9,4 @@ protokoll-*.gem
 rdoc/
 .DS_Store/
 lib/.DS_Store
+Gemfile.lock
