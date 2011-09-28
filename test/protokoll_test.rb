@@ -97,9 +97,7 @@ class ProtokollTest < ActiveSupport::TestCase
     Protocol.protokoll.pattern = "%y%m##"
 
     protocol1 = Protocol.create
-
     Timecop.travel(Time.now + 1.month)
-
     protocol2 = Protocol.create
 
     assert_equal "111001", protocol2.number
@@ -116,8 +114,9 @@ class ProtokollTest < ActiveSupport::TestCase
   test "%y## on next year should get 1201" do
     Protocol.protokoll.pattern = "%y##"
 
+    time = Time.local(2011, 9, 25, 12, 3, 0) # 
     protocol1 = Protocol.create
-    time = Time.local(2012, 9, 25, 12, 3, 0)
+    time = Time.local(2012, 9, 25, 12, 3, 0) # exactly 1 year after
     Timecop.travel(time)
 
     protocol2 = Protocol.create
@@ -179,6 +178,8 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "2011150001PROTO", protocol1.number
   end
   
+  ## Can't reproduce this on test environmet!
+  ## if you know how to do that, contact-me!
   # test "Start application with populated db." do  
   #   Protocol.protokoll.pattern = "%Y%M####PROTO"
   # 
@@ -186,11 +187,9 @@ class ProtokollTest < ActiveSupport::TestCase
   #   Protocol.create
   #   Protocol.create
   #   
-  #   # restart application
-  #   class << Protocol
-  #     remove_method :protokoll
-  #   end
-  #   
+  #   # restart application or reload Protocol model
+  #   # how do I do that? 
+  #
   #   protocol = Protocol.create
   # 
   #   assert_equal "2011090004PROTO", protocol.number
