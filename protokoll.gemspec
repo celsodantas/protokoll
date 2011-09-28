@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Celso Dantas"]
   s.email       = ["celsodantas@gmail.com"]
   s.homepage    = "https://github.com/celsodantas/protokoll"
-  s.summary     = "A simple Rails gem to create custom autoincrement values to a database column"
-  s.description = "Rails gem to enable creation of autoincrement Time based string on a model defined by a pattern. Ex: :pattern => 'P%y###' produces: 'P2011001', 'P2011002'..."
+  s.summary     = "A simple Rails gem to create custom autoincrement Time base values to a database column"
+  s.description = "Rails 3 gem to enable creation of a custom autoincrement Time based string on a model defined by a pattern." 
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
