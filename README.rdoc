@@ -2,7 +2,7 @@
 
 Protokoll is a simple Rails 3 pluggin to simplify the management of a custom autoincrement value for a model. 
 
-If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you!
+If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you! If you want to create just an custom autoincrement value, this gem is for you too! =)
 
 All those tricky things to control like every month you have to reset the counter are gone! All you have to do is define a String column and let _Protokoll_ handle the rest:
 
@@ -43,12 +43,15 @@ If you want to use your own pattern, just do this:
 
 Or use any time based format. You can use in the pattern any combination of:
  # assume it's 2011/01/01 12:00
+ "%Y" for year   	# => appends 2011 
  "%y" for year   	# => appends 11 
  "%m" for month  	# => appends 01
  "%d" for day	 	# => appends 01
  "%H" for hour	 	# => appends 12
  "%M" for minute 	# => appends 00
  "#"  for the autoincrement number (use and long as you want)
+
+Using the Time formating string ("%y", "%m", ...) is totally optional. It's fine to use "CALL####", "BUY###N" or any combination you like.
 
 Ex:
     # :number must be a String
