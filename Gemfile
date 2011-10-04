@@ -11,6 +11,6 @@ gemspec
 # your gem to rubygems.org.
 
 # To use debugger
-gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'timecop'
 
