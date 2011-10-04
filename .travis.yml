@@ -1,5 +1,8 @@
 rvm:
   - 1.9.2
+
+script: bundle exec rake
+
 notifications:
   recipients:
     - celsodantas@gmail.com
