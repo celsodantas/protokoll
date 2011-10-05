@@ -1,4 +1,4 @@
-= Protokoll
+= Protokoll [![Build status](http://travis-ci.org/celsodantas/protokoll.png)](http://travis-ci.org/celsodantas/protokoll)
 
 Protokoll is a simple Rails 3 pluggin to simplify the management of a custom autoincrement value for a model. 
 
