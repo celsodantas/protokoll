@@ -1,5 +1,4 @@
-= Protokoll [![Build status](http://travis-ci.org/celsodantas/protokoll.png)](http://travis-ci.org/celsodantas/protokoll)
-
+= Protokoll {<img src="http://travis-ci.org/celsodantas/protokoll.png"/>}[http://travis-ci.org/celsodantas/protokoll]
 Protokoll is a simple Rails 3 pluggin to simplify the management of a custom autoincrement value for a model. 
 
 If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you! If you want to create just an custom autoincrement value, this gem is for you too! =)
