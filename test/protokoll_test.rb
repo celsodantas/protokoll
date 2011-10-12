@@ -196,6 +196,18 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "201101", call.number
   end
   
+  test "updating model should not get a different number" do
+    Protocol.protokoll.pattern = "%Y##"
+    
+    protocol = Protocol.new
+
+    protocol.save
+    assert_equal "201101", protocol.number
+    
+    protocol.save
+    assert_equal "201101", protocol.number
+  end
+  
   ## Can't reproduce this on test environmet!
   ## if you know how to do that, contact-me!
   # test "Start application with populated db." do  
