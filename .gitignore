@@ -8,5 +8,6 @@ test/dummy/tmp/
 protokoll-*.gem
 rdoc/
 .DS_Store/
+.DS_Store
 lib/.DS_Store
 Gemfile.lock
