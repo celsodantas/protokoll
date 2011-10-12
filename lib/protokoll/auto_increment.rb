@@ -4,27 +4,49 @@ module Protokoll
     attr_accessor :options
     attr_accessor :count
     
+    # Class initializer
+    # creates counter (starts with 0) and when before 
+    # the model is created runs @count+1
     def initialize
       @count = 0
     end
     
+    # sets the pattern to be used. Default: %Y%m##### = 20110900001, 20110900002...
     def pattern=(p)
       options[:pattern] = p
     end
     
+    # get the pattern
     def pattern
       options[:pattern]
     end
     
+    # sets the symbol to be used as a counter digit. Default: #
     def number_symbol=(s)
       options[:number_symbol] = s
     end
     
+    # get the symbol to be used as a counter digit. Default: #
     def number_symbol
       options[:number_symbol]
     end
     
-    def next_custom_number(column, number)
+    # gets the next number.
+    # it prepends the prefix + counter + sufix
+    # ex:
+    #   "%Y####BANK" 
+    #   %Y => prefix (year)
+    #   #### => counter (starts with 0001)
+    #   BANK => sufix
+    # 
+    # if we are in 2011, the first model to be saved will get "20110001BANK"
+    # the next model to be saved will get "20110002BANK", "20110003BANK"...
+    #
+    #   number => is the counter
+    #   
+    #   next_custom_number(1) 
+    #   => "20110001BANK"
+    def next_custom_number(number)
       prefix(options[:pattern]).to_s + 
       counter(options[:pattern], number).to_s + 
       sufix(options[:pattern]).to_s

@@ -6,6 +6,14 @@ module Protokoll
   extend ActiveSupport::Concern
 
   module ClassMethods
+    
+    # Class method available in models
+    # 
+    # == Example
+    #   class Order < ActiveRecord::Base
+    #      protokoll :number
+    #   end
+    #
     def protokoll(column = nil, _options = {})
       ClassVariable.add_to self, :@@protokoll, :default => AutoIncrement.new
       
