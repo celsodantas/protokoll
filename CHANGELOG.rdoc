@@ -1,3 +1,7 @@
+== v0.3.1
+* BUG FIX: Updates were updating the number count. oO
+		   now the number is only incremented when you create the model.
+
 == v0.3.0
 * BUG FIX: If using %y%m and only year changes, counter was not restarting.
 

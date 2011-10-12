@@ -17,7 +17,7 @@ module Protokoll
       
       prot.options = options          
           
-      before_save do |record|      
+      before_create do |record|      
         last = record.class.last
         
         if last.present?
