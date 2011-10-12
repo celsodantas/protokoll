@@ -100,8 +100,6 @@ module Protokoll
       Time.now.strftime(update_event).to_i > record.created_at.strftime(update_event).to_i
     end
 
-    # BUG 1 : If using %y%m# and only year changes (user stays 
-    # more then one year without updating the model) counter doesn't updates!
     def update_event
       pattern = options[:pattern]
       event = String.new

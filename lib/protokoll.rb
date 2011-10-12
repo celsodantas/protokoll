@@ -37,7 +37,7 @@ module Protokoll
         end
         
         prot.count += 1
-        record[column] = prot.next_custom_number(column, prot.count)
+        record[column] = prot.next_custom_number(prot.count)
       end
     end
   end
