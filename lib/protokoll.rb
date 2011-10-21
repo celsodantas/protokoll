@@ -15,6 +15,9 @@ module Protokoll
     #   end
     #
     def protokoll(column = nil, _options = {})
+      #
+      # TODO:: REFACTOR THE CODE!
+      #
       ClassVariable.add_to self, :@@protokoll, :default => AutoIncrement.new
       
       prot = ClassVariable.get_from self, :@@protokoll
@@ -24,7 +27,7 @@ module Protokoll
       options.merge!(_options)
       
       prot.options = options
-      
+
       send :define_method, "reserve_#{prot.options[:column]}!".to_sym do
         prot = self.class.protokoll
         column_name = prot.options[:column]
