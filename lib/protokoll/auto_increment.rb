@@ -3,12 +3,14 @@ module Protokoll
   class AutoIncrement    
     attr_accessor :options
     attr_accessor :count
+    attr_accessor :last
     
     # Class initializer
     # creates counter (starts with 0) and when before 
     # the model is created runs @count+1
     def initialize
       @count = 0
+      @last = nil
     end
     
     # sets the pattern to be used. Default: %Y%m##### = 20110900001, 20110900002...
@@ -47,9 +49,12 @@ module Protokoll
     #   next_custom_number(1) 
     #   => "20110001BANK"
     def next_custom_number(number)
-      prefix(options[:pattern]).to_s + 
-      counter(options[:pattern], number).to_s + 
-      sufix(options[:pattern]).to_s
+      number += 1
+      pattern = options[:pattern]
+      next_number = prefix(pattern).to_s + counter(pattern, number).to_s + sufix(pattern).to_s
+      
+      @last = { at: Time.now, number: next_number }
+      next_number
     end
     
     def prefix(pattern)
@@ -96,8 +101,8 @@ module Protokoll
       (pattern =~ /[#{symbol}]+/ and $&).length
     end
 
-    def outdated?(record)
-      Time.now.strftime(update_event).to_i > record.created_at.strftime(update_event).to_i
+    def outdated?(created_at)
+      Time.now.strftime(update_event).to_i > created_at.strftime(update_event).to_i
     end
 
     def update_event
