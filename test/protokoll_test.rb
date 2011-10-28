@@ -8,7 +8,6 @@ class ProtokollTest < ActiveSupport::TestCase
     
     Protocol.destroy_all
     Protocol.protokoll.count = 0
-    Protocol.protokoll.last = nil
   end
   
   test "using new number_symbol with default pattern should get 20110900001" do
@@ -218,48 +217,48 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "201101", protocol.number
   end
 
-  test "reserve_number should set number to instance" do
-    Protocol.protokoll.pattern = "%Y##"
-  
-    protocol = Protocol.new
-    protocol.reserve_number!
-  
-    assert_equal "201101", protocol.number
-    protocol.save
-    assert_equal "201101", protocol.number
-  
-    protocol = Protocol.new
-    protocol.save
-    assert_equal "201102", protocol.number
-  end
-
-  test "reserve_number should assure number if reserved" do
-    Protocol.protokoll.pattern = "%Y##"
-  
-    protocol1 = Protocol.new
-    protocol1.reserve_number!
-
-    protocol2 = Protocol.new
-    protocol2.save
-  
-    assert_equal "201101", protocol1.number
-    assert_equal "201102", protocol2.number
-  end
-  
-  test "reserve_number should assure number if reserved if next month" do
-     Protocol.protokoll.pattern = "%Y%m##"
-
-     protocol1 = Protocol.create
-     protocol1.reserve_number!
-
-     Timecop.travel(Time.now + 1.month)
-     
-     protocol2 = Protocol.new
-     protocol2.save!
-
-     assert_equal "20110901", protocol1.number
-     assert_equal "20111001", protocol2.number
-   end
+  # test "reserve_number should set number to instance" do
+  #   Protocol.protokoll.pattern = "%Y##"
+  # 
+  #   protocol = Protocol.new
+  #   protocol.reserve_number!
+  # 
+  #   assert_equal "201101", protocol.number
+  #   protocol.save
+  #   assert_equal "201101", protocol.number
+  # 
+  #   protocol = Protocol.new
+  #   protocol.save
+  #   assert_equal "201102", protocol.number
+  # end
+  # 
+  # test "reserve_number should assure number if reserved" do
+  #   Protocol.protokoll.pattern = "%Y##"
+  # 
+  #   protocol1 = Protocol.new
+  #   protocol1.reserve_number!
+  # 
+  #   protocol2 = Protocol.new
+  #   protocol2.save
+  # 
+  #   assert_equal "201101", protocol1.number
+  #   assert_equal "201102", protocol2.number
+  # end
+  # 
+  # test "reserve_number should assure number if reserved if next month" do
+  #    Protocol.protokoll.pattern = "%Y%m##"
+  # 
+  #    protocol1 = Protocol.create
+  #    protocol1.reserve_number!
+  # 
+  #    Timecop.travel(Time.now + 1.month)
+  #    
+  #    protocol2 = Protocol.new
+  #    protocol2.save!
+  # 
+  #    assert_equal "20110901", protocol1.number
+  #    assert_equal "20111001", protocol2.number
+  #  end
   
   ## Can't reproduce this on test environmet!
   ## if you know how to do that, contact-me!
