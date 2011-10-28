@@ -67,9 +67,11 @@ Ex:
     
    # will produce => "2011HOUSE00001", "2011HOUSE00002"...
 
-== New (not yet on rubygems.org)
+== On the go features...
 
-After version 0.4.0+ was added a new intance method colled: "your_instance#reserve_#{column_name}!".
+   object.reserve_number
+
+Add a new intance method colled: "your_instance#reserve_#{column_name}!".
 With it you can reserve a number without the need to save it to the database. Ex:
 
   car = Car.new
