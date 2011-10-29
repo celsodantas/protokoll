@@ -69,7 +69,7 @@ Ex:
 
 == On the go features...
 
-   object.reserve_number
+   object.reserve_number!
 
 Add a new intance method colled: "your_instance#reserve_#{column_name}!".
 With it you can reserve a number without the need to save it to the database. Ex:
