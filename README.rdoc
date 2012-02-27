@@ -67,7 +67,7 @@ Ex:
     
    # will produce => "2011HOUSE00001", "2011HOUSE00002"...
 
-== On the go features...
+== reserve_number!
 
    object.reserve_number!
 
