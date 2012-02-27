@@ -1,7 +1,9 @@
 == v0.4.0
-* Added to the model instance a method called: obj#reserve_#{column}
-	- Makes possible to reserve a number without the need to save the model in to the DB.
-	- new tests to check if the new feature works
+* Adding support to database driven counter and not in memory anymore.
+* Simplifying code
+* new API:
+	reserve_<column name> # use to get the auto generated number without 
+						  #	saving the model in the database
 		
 == v0.3.1
 * BUG FIX: Updates were updating the number count. oO
