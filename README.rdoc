@@ -3,15 +3,6 @@ Protokoll is a simple Rails 3 pluggin to simplify the management of a custom aut
 
 If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you! If you want to create just an custom autoincrement value, this gem is for you too! =)
 
-= Installation
-
-1. Add the gem to your Gemfilme: <code>gem 'protokoll'</code>
-2. run the the <code>bundle</code> command
-3. run the generation <code>rails g protokoll:migration</code>
-4. run migration to create the necessary table <code>rake db:migrate</code>
-
-= Usage
-
 All those tricky things to control like every month you have to reset the counter are gone! All you have to do is define a String column and let _Protokoll_ handle the rest:
 
     # creating an autoincrement column based on Time
@@ -102,6 +93,14 @@ Just add to the Gemfile:
 And run _bundle install_ on the Rails application folder
 
    bundle install
+
+Run the generator
+
+   rails g protokoll:migration
+
+and migrate your database
+
+   rake db:migrate
 
 == Questions & Sugestions
 This is my _first_ public gem, so if you have any questions os sugestions, feel free to contact me (use github msg system for that). It will be awesome to hear feedback to improve the code.
