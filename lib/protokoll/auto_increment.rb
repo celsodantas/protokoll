@@ -63,28 +63,6 @@ module Protokoll
       (pattern =~ /[#]+/ and $&).length
     end
 
-    def time_outdated?(pattern, record_date)
-      if (pattern.include? "%y") # year
-        return true if Time.now.year > record_date.year
-      end
-
-      if (pattern.include? "%m") # month
-        return true if Time.now.month > record_date.month
-      end
-
-      if (pattern.include? "%d") # day
-        return true if Time.now.day > record_date.day
-      end
-
-      if (pattern.include? "%H") # hour
-        return true if Time.now.hour > record_date.hour
-      end
-
-      if (pattern.include? "%M") # minute
-        return true if Time.now.minute > record_date.min
-      end
-    end
-
     def outdated?(record)
       Time.now.strftime(update_event).to_i > record.created_at.strftime(update_event).to_i
     end
