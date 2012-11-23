@@ -6,10 +6,10 @@ class CreateCustomAutoIncrements < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :custom_auto_increment, :model_name
+    add_index :custom_auto_increments, :model_name
   end
 
   def down
-    drop_table :custom_auto_increment
+    drop_table :custom_auto_increments
   end
 end
