@@ -5,7 +5,7 @@ module Protokoll
     def self.next(object, options)
       element = Models::CustomAutoIncrement.find_or_create_by_model_name(object.class.to_s.underscore)
       
-      element.counter = 0 if outdated?(element, options)
+      element.counter = (0 + options[:start]) if outdated?(element, options)
       element.counter += 1
 
       element.save!
