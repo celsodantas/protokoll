@@ -13,7 +13,8 @@ module Protokoll
     def protokoll(column, _options = {})
       options = { :pattern       => "%Y%m#####", 
                   :number_symbol => "#",
-                  :column        => column }
+                  :column        => column,
+                  :start         => 0 }
 
       options.merge!(_options)
       
