@@ -326,21 +326,32 @@ class ProtokollTest < ActiveSupport::TestCase
   end
   
   test "reserve_number should assure number if reserved if next month" do
-     class Protocol < ActiveRecord::Base
-       protokoll :number, :pattern => "%Y%m##"
-     end
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :pattern => "%Y%m##"
+    end
   
-     protocol1 = Protocol.new
-     protocol1.reserve_number!
+    protocol1 = Protocol.new
+    protocol1.reserve_number!
   
-     Timecop.travel(Time.now + 1.month)
-     
-     protocol2 = Protocol.new
-     protocol2.save!
+    Timecop.travel(Time.now + 1.month)
+    
+    protocol2 = Protocol.new
+    protocol2.save!
   
-     assert_equal "20110901", protocol1.number
-     assert_equal "20111001", protocol2.number
+    assert_equal "20110901", protocol1.number
+    assert_equal "20111001", protocol2.number
    end
+
+  test "starting shift should work" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :pattern => "%Y%m##", :start => 33
+    end
+  
+    protocol = Protocol.new
+    protocol.save
+
+    assert_equal "20110934", protocol.number
+  end
 
 end
 
