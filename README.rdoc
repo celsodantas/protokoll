@@ -1,4 +1,13 @@
 = Protokoll {<img src="http://travis-ci.org/celsodantas/protokoll.png"/>}[http://travis-ci.org/celsodantas/protokoll]
+
+== Rails 4 branch
+
+There's a Rails 4 branch that any fix/deprecation will be merged there. You can use the branch adding this to your Gemfile:
+
+    gem 'protokoll', git: 'git://github.com/celsodantas/protokoll.git', branch: 'rails4'
+
+= Description
+
 Protokoll is a simple Rails 3 pluggin to simplify the management of a custom autoincrement value for a model. 
 
 If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you! If you want to create just an custom autoincrement value, this gem is for you too! =)
