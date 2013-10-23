@@ -16,7 +16,7 @@ module Protokoll
     private
 
     def self.outdated?(record, options)
-      Time.now.strftime(update_event(options)).to_i > record.created_at.strftime(update_event(options)).to_i
+      Time.now.strftime(update_event(options)).to_i > record.updated_at.strftime(update_event(options)).to_i
     end
 
     def self.update_event(options)
