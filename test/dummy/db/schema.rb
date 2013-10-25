@@ -28,12 +28,6 @@ ActiveRecord::Schema.define(:version => 20120222164124) do
 
   add_index "custom_auto_increments", ["model_name"], :name => "index_custom_auto_increments_on_model_name"
 
-  create_table "principals", :force => true do |t|
-    t.string   "protokoll_number"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
   create_table "protocols", :force => true do |t|
     t.string   "number"
     t.datetime "created_at", :null => false
