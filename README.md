@@ -1,4 +1,4 @@
-# Protokoll [<img src="http://travis-ci.org/celsodantas/protokoll.png"/>](http://travis-ci.org/celsodantas]/protokoll)
+# Protokoll [![Travis](https://api.travis-ci.org/celsodantas/protokoll.png)](http://travis-ci.org/celsodantas/protokoll)
 
 
 ## Description
