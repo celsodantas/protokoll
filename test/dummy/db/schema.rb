@@ -9,35 +9,29 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222164124) do
+ActiveRecord::Schema.define(version: 20120222164124) do
 
-  create_table "calls", :force => true do |t|
+  create_table "calls", force: true do |t|
     t.string   "number"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "custom_auto_increments", :force => true do |t|
+  create_table "custom_auto_increments", force: true do |t|
     t.string   "model_name"
-    t.integer  "counter",    :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "counter",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "custom_auto_increments", ["model_name"], :name => "index_custom_auto_increments_on_model_name"
+  add_index "custom_auto_increments", ["model_name"], name: "index_custom_auto_increments_on_model_name"
 
-  create_table "principals", :force => true do |t|
-    t.string   "protokoll_number"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
-
-  create_table "protocols", :force => true do |t|
+  create_table "protocols", force: true do |t|
     t.string   "number"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
