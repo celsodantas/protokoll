@@ -8,6 +8,9 @@ module Protokoll
       element.counter = options[:start] if outdated?(element, options) || element.counter == 0
       element.counter += 1
 
+      element.touch unless element.changed?
+      element.save! if element.changed?
+
       element.save!
 
       Formater.new.format(element.counter, options)
