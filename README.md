@@ -65,7 +65,6 @@ Or use any time based format. You can use in the pattern any combination of:
 Using the Time formating string ("%y", "%m", ...) is totally optional. It's fine to use "CALL####", "BUY###N" or any combination you like.
 
 Ex:
-
 ```ruby
 # :number must be a String
 class Car < ActiveRecord::Base
@@ -135,8 +134,10 @@ You need to clone the project
     cd protokoll
 
 Then  prepare the test database:
+
     bundle
     cd test/dummy && rake db:migrate && rake db:test:prepare && cd ../..
 
 Now run the rake test to run the tests:
+
     rake test
