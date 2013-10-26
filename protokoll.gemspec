@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "A simple Rails gem to create custom autoincrement Time base values to a database column"
   s.description = "Rails 4 gem to enable creation of a custom autoincrement Time based string on a model defined by a pattern. ex. 20110001, 20110002, 20110003, 20120001, 20120002..." 
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails"
