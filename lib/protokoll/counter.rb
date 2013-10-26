@@ -8,6 +8,9 @@ module Protokoll
       element.counter = options[:start] if outdated?(element, options) || element.counter == 0
       element.counter += 1
 
+      element.touch unless element.changed?
+      element.save! if element.changed?
+
       element.save!
 
       Formater.new.format(element.counter, options)
@@ -16,7 +19,7 @@ module Protokoll
     private
 
     def self.outdated?(record, options)
-      Time.now.strftime(update_event(options)).to_i > record.created_at.strftime(update_event(options)).to_i
+      Time.now.strftime(update_event(options)).to_i > record.updated_at.strftime(update_event(options)).to_i
     end
 
     def self.update_event(options)

@@ -15,23 +15,23 @@ ActiveRecord::Schema.define(version: 20120222164124) do
 
   create_table "calls", force: true do |t|
     t.string   "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "custom_auto_increments", force: true do |t|
     t.string   "model_name"
     t.integer  "counter",    default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "custom_auto_increments", ["model_name"], name: "index_custom_auto_increments_on_model_name"
 
   create_table "protocols", force: true do |t|
     t.string   "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
