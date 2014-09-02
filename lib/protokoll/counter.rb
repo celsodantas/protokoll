@@ -30,6 +30,7 @@ module Protokoll
       event += "%m" if pattern.include? "%m"
       event += "%H" if pattern.include? "%H"
       event += "%M" if pattern.include? "%M"
+      event += "%d" if pattern.include? "%d"
       event
     end
   end

@@ -131,7 +131,7 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "111", protocol1.number
   end
 
-  #
+
   test "first use of %y%m## should get 110901" do
     class Protocol < ActiveRecord::Base
       protokoll :number, :pattern => "%y%m##"
@@ -140,7 +140,7 @@ class ProtokollTest < ActiveSupport::TestCase
     protocol1 = Protocol.create
     assert_equal "110901", protocol1.number
   end
-  #
+
   test "using %y%m## on next month after should get 111001" do
     class Protocol < ActiveRecord::Base
       protokoll :number, :pattern => "%y%m##"
@@ -369,6 +369,23 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "20110901", protocol1.number
     assert_equal "20111001", protocol2.number
     assert_equal "20111002", protocol3.number
+  end
+
+  test "counter should consider day in pattern" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :pattern => "%Y%m%d##"
+    end
+
+    protocol1 = Protocol.create!
+    protocol2 = Protocol.create!
+
+    Timecop.travel(1.day)
+
+    protocol3 = Protocol.create!
+
+    assert_equal "2011092501", protocol1.number
+    assert_equal "2011092502", protocol2.number
+    assert_equal "2011092601", protocol3.number
   end
 
 end
