@@ -25,9 +25,9 @@ module Protokoll
 
       # Signing before_create
       before_create do |record|
-        return if record[column].present?
-
-        record[column] = Counter.next(self, options)
+        unless record[column].present?
+          record[column] = Counter.next(self, options)
+        end
       end
     end
   end
