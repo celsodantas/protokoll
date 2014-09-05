@@ -2,22 +2,22 @@ module Protokoll
   extend ActiveSupport::Concern
 
   module ClassMethods
-    
+
     # Class method available in models
-    # 
+    #
     # == Example
     #   class Order < ActiveRecord::Base
     #      protokoll :number
     #   end
     #
     def protokoll(column, _options = {})
-      options = { :pattern       => "%Y%m#####", 
+      options = { :pattern       => "%Y%m#####",
                   :number_symbol => "#",
                   :column        => column,
                   :start         => 0 }
 
       options.merge!(_options)
-      
+
       # Defining custom method
       send :define_method, "reserve_#{options[:column]}!".to_sym do
         self[column] = Counter.next(self, options)
@@ -31,5 +31,5 @@ module Protokoll
       end
     end
   end
-  
+
 end

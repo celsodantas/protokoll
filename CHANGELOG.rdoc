@@ -1,10 +1,14 @@
+== v0.6.0
+* BUG FIX: LocalJumpError (#11)
+* Added "day" pattern (#8)
+
 == v0.4.0
 * Adding support to database driven counter and not in memory anymore.
 * Simplifying code
 * new API:
-	reserve_<column name> # use to get the auto generated number without 
+	reserve_<column name> # use to get the auto generated number without
 						  #	saving the model in the database
-		
+
 == v0.3.1
 * BUG FIX: Updates were updating the number count. oO
 		   now the number is only incremented when you create the model.
@@ -14,9 +18,9 @@
 
 == v0.2.0
 * Performance improvement
-* Refactoring 
+* Refactoring
 
-== v0.1.1  
+== v0.1.1
 * Updating gem description
 
 == v0.1.0
