@@ -1,4 +1,4 @@
-# Protokoll [![Travis](https://api.travis-ci.org/celsodantas/protokoll.png)](http://travis-ci.org/celsodantas/protokoll) [![Gem Version](https://badge.fury.io/rb/protokoll@2x.png)](http://badge.fury.io/rb/protokoll)
+# Protokoll [![Travis](https://api.travis-ci.org/celsodantas/protokoll.png)](http://travis-ci.org/celsodantas/protokoll) [![Gem Version](https://badge.fury.io/rb/protokoll.svg)](http://badge.fury.io/rb/protokoll)
 
 
 ## Description
