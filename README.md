@@ -88,13 +88,15 @@ end
 Add a new intance method colled: "your_instance#reserve_#{column_name}!".
 With it you can reserve a number without the need to save it to the database. Ex:
 
-  car = Car.new
-  car.number
-  # => nil
-  car.reserve_number!
-  car.number
-  # => "CAR1100001"
-  # if you save it, the object will preserve the number: "CAR1100001"
+```ruby
+ car = Car.new
+ car.number
+ # => nil
+ car.reserve_number!
+ car.number
+ # => "CAR1100001"
+ # if you save it, the object will preserve the number: "CAR1100001"
+```
 
 It just increases the counter so any other object that gets saved or uses the #reserve_#{column_name} will get the next available number.
 
