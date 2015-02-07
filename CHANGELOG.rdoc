@@ -1,3 +1,7 @@
+== v1.0.0
+* BUG FIX: column rename (#17)
+* bump to 1.0.0 to let people know about the API incompability
+
 == v0.6.0
 * BUG FIX: LocalJumpError (#11)
 * Added "day" pattern (#8)

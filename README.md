@@ -124,9 +124,11 @@ and migrate your database
 ## Questions & Sugestions
 This is my _first_ public gem, so if you have any questions os sugestions, feel free to contact me (use github msg system for that). It will be awesome to hear feedback to improve the code.
 
-The gem is still on early _alpha_ so you may find bugs on it. And if you do, please use the _Issues_ here in Github and I'd love to fix it.  
+The gem is still on early _alpha_ so you may find bugs on it. And if you do, please use the _Issues_ here in Github and I'd love to fix it.
 
 This piece of software is free to use.
+
+Check the wiki if you are having any issues while upgrading from version `0.x`
 
 ### Running tests in Development
 
