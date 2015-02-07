@@ -3,7 +3,7 @@
 
 ## Description
 
-Protokoll is a simple Rails 4 pluggin to simplify the management of a custom autoincrement value for a model. 
+Protokoll is a simple Rails 4 pluggin to simplify the management of a custom autoincrement value for a model.
 
 If you want to create an autoincrement information on the database, just like those callcenter registration number (2011000001, 2011000002, 20110000003 and on) this gem is for you! If you want to create just an custom autoincrement value, this gem is for you too! =)
 
@@ -53,13 +53,13 @@ Or use any time based format. You can use in the pattern any combination of:
 
 ```ruby
 # assume it's 2011/01/01 12:00
-"%Y" for year   	# => appends 2011 
-"%y" for year   	# => appends 11 
+"%Y" for year   	# => appends 2011
+"%y" for year   	# => appends 11
 "%m" for month  	# => appends 01
 "%d" for day	 	# => appends 01
 "%H" for hour	 	# => appends 12
 "%M" for minute 	# => appends 00
-"#"  for the autoincrement number (use and long as you want)
+"#"  for the autoincrement number (use as long as you want)
 ```
 
 Using the Time formating string ("%y", "%m", ...) is totally optional. It's fine to use "CALL####", "BUY###N" or any combination you like.
@@ -71,7 +71,7 @@ class Car < ActiveRecord::Base
     protokoll :number, :pattern => "CAR%y#####"
 end
 
-# will produce => "CAR1100001", "CAR1100002"... 
+# will produce => "CAR1100001", "CAR1100002"...
 
 # :sell_number must be a String
 class House < ActiveRecord::Base
@@ -103,7 +103,7 @@ It just increases the counter so any other object that gets saved or uses the #r
 ## Installation
 
 Just add to the Gemfile:
- 
+
 ```ruby
 gem 'protokoll'
 ```
