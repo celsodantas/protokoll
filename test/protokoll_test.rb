@@ -13,7 +13,7 @@ class ProtokollTest < ActiveSupport::TestCase
 
   def reset_models
     ProtokollTest.send(:remove_const, 'Protocol') if defined? Protocol
-    ProtokollTest.send(:remove_const, 'Call')     if defined? Call
+    ProtokollTest.send(:remove_const, 'Call') if defined? Call
   end
 
   ##
@@ -158,17 +158,17 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "111001", protocol.number
   end
 
-   test "%y%m%H#### should get 1109120001" do
-     class Protocol < ActiveRecord::Base
-       protokoll :number, :pattern => "%y%m%H####"
-     end
+  test "%y%m%H#### should get 1109120001" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :pattern => "%y%m%H####"
+    end
 
-     protocol1 = Protocol.create
+    protocol1 = Protocol.create
 
-     assert_equal "1109120001", protocol1.number
-   end
+    assert_equal "1109120001", protocol1.number
+  end
 
-   test "%y## on next year should get 1201" do
+  test "%y## on next year should get 1201" do
     class Protocol < ActiveRecord::Base
       protokoll :number, :pattern => "%y##"
     end
@@ -181,7 +181,7 @@ class ProtokollTest < ActiveSupport::TestCase
     protocol2 = Protocol.create
 
     assert_equal "1201", protocol2.number
-   end
+  end
 
   test "500.time create using %y%m%H#### should get 1109120500" do
     class Protocol < ActiveRecord::Base
@@ -340,7 +340,7 @@ class ProtokollTest < ActiveSupport::TestCase
 
     assert_equal "20110901", protocol1.number
     assert_equal "20111001", protocol2.number
-   end
+  end
 
   test "starting shift should work" do
     class Protocol < ActiveRecord::Base
@@ -386,6 +386,24 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "2011092501", protocol1.number
     assert_equal "2011092502", protocol2.number
     assert_equal "2011092601", protocol3.number
+  end
+
+  test "rejects empty patterns" do
+
+    assert_raise ArgumentError do
+      class Protocol < ActiveRecord::Base
+        protokoll :number, :pattern => nil
+      end
+    end
+  end
+
+  test "rejects invalid patterns" do
+
+    assert_raise ArgumentError do
+      class Protocol < ActiveRecord::Base
+        protokoll :number, :pattern => "%ydodgyPattern"
+      end
+    end
   end
 
 end
