@@ -388,6 +388,24 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "2011092601", protocol3.number
   end
 
+  test "rejects empty patterns" do
+
+    assert_raise ArgumentError do
+      class Protocol < ActiveRecord::Base
+        protokoll :number, :pattern => nil
+      end
+    end
+  end
+
+  test "rejects invalid patterns" do
+
+    assert_raise ArgumentError do
+      class Protocol < ActiveRecord::Base
+        protokoll :number, :pattern => "%ydodgyPattern"
+      end
+    end
+  end
+
 end
 
 

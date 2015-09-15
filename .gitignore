@@ -11,3 +11,5 @@ rdoc/
 .DS_Store
 lib/.DS_Store
 Gemfile.lock
+.ruby-gemset
+.ruby-version
