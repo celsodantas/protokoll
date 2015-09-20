@@ -1,3 +1,7 @@
+== v1.0.1
+* BUG FIX: time comparison with UTC (#14)
+* Adding code announcement for bad or missing patterns (thanks @sammyjopeters)
+
 == v1.0.0
 * BUG FIX: column rename (#17)
 * bump to 1.0.0 to let people know about the API incompability
