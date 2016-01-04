@@ -11,4 +11,3 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'timecop'
-gem 'debugger'
