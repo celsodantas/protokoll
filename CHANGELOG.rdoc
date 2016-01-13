@@ -1,3 +1,6 @@
+== v1.0.2
+* accepting Rails >4 #21
+* removing debugger gem and dropping ruby 1.9.3 support
 == v1.0.1
 * BUG FIX: time comparison with UTC (#14)
 * Adding code announcement for bad or missing patterns (thanks @sammyjopeters)
