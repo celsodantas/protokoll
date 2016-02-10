@@ -14,7 +14,8 @@ module Protokoll
       options = { :pattern       => "%Y%m#####",
                   :number_symbol => "#",
                   :column        => column,
-                  :start         => 0 }
+                  :start         => 0,
+                  :scope_by      => nil }
 
       options.merge!(_options)
       raise ArgumentError.new("pattern can't be nil!") if options[:pattern].nil?

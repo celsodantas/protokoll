@@ -21,15 +21,19 @@ ActiveRecord::Schema.define(version: 20120222164124) do
 
   create_table "custom_auto_increments", force: :cascade do |t|
     t.string   "counter_model_name"
-    t.integer  "counter",            default: 0
+    t.string   "counter_model_scope"
+    t.integer  "counter",             default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "custom_auto_increments", ["counter_model_name", "counter_model_scope"], name: "counter_model_name_by_scope", unique: true
   add_index "custom_auto_increments", ["counter_model_name"], name: "index_custom_auto_increments_on_counter_model_name"
 
   create_table "protocols", force: :cascade do |t|
     t.string   "number"
+    t.string   "context"
+    t.string   "context_2"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -81,6 +81,30 @@ end
 # will produce => "2011HOUSE00001", "2011HOUSE00002"...
 ```
 
+It's possible to pass :scope_by option as a simple method, Proc.new or lambda
+
+Ex:
+```ruby
+# :manufacturer should be a Car's instance method(like an ActiveRecord column)
+class Car < ActiveRecord::Base
+    protokoll :code, :scope_by => :manufacturer
+end
+# will scope Cars by manufacturers, for example "Ford", "Chevrolet"
+
+# :manufacturer and :year should be Car's instance methods(like ActiveRecord columns)
+class Car < ActiveRecord::Base
+    protokoll :code, :scoped_by => lambda { |o| "#{o.manufacturer}-#{o.year}" }
+end
+# will scope Cars by for example "Ford-2016"
+
+# :manufacturer and :year should be Car's instance methods(like ActiveRecord columns)
+class Car < ActiveRecord::Base
+    protokoll :code, :scoped_by => Proc.new{ "#{manufacturer}-#{model}" }
+end
+# will scope Cars by for example "Ford-Mustang", "Chevrolet-Camaro"
+```
+
+
 ## reserve_number!
 
    object.reserve_number!
