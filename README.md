@@ -93,13 +93,13 @@ end
 
 # :manufacturer and :year should be Car's instance methods(like ActiveRecord columns)
 class Car < ActiveRecord::Base
-    protokoll :code, :scoped_by => lambda { |o| "#{o.manufacturer}-#{o.year}" }
+    protokoll :code, :scope_by => lambda { |o| "#{o.manufacturer}-#{o.year}" }
 end
 # will scope Cars by for example "Ford-2016"
 
 # :manufacturer and :year should be Car's instance methods(like ActiveRecord columns)
 class Car < ActiveRecord::Base
-    protokoll :code, :scoped_by => Proc.new{ "#{manufacturer}-#{model}" }
+    protokoll :code, :scope_by => Proc.new{ "#{manufacturer}-#{model}" }
 end
 # will scope Cars by for example "Ford-Mustang", "Chevrolet-Camaro"
 ```
@@ -139,6 +139,10 @@ And run _bundle install_ on the Rails application folder
 Run the generator
 
     rails g protokoll:migration
+
+Optional: If scope_by will be used run next generator as well
+
+    rails g protokoll:migration:scope_by
 
 and migrate your database
 
