@@ -19,7 +19,7 @@ module Protokoll
     private
 
     def self.build_attrs(object, options)
-      attrs = {counter_model_name: object.class.to_s.underscore}
+      attrs = {counter_model_name: object.model_name.name.underscore}
       return attrs unless options[:scope_by]
 
       scope_by =  options[:scope_by].respond_to?(:call) ?
