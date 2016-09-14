@@ -388,6 +388,53 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "2011092601", protocol3.number
   end
 
+  test "counter should consider instance method scope given" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :scope_by => :context
+    end
+
+    protocol1 = Protocol.create! context: 'scenario_1'
+    protocol2 = Protocol.create! context: 'scenario_2'
+    protocol3 = Protocol.create! context: 'scenario_1'
+
+    assert_equal "20110900001", protocol1.number
+    assert_equal "20110900001", protocol2.number
+    assert_equal "20110900002", protocol3.number
+  end
+
+  test "counter should consider Proc scope given" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :scope_by => Proc.new { "#{context}-#{context_2}" }
+    end
+
+    protocol1 = Protocol.create! context: 'scenario_1', context_2: 'case1'
+    protocol2 = Protocol.create! context: 'scenario_2', context_2: 'case1'
+    protocol3 = Protocol.create! context: 'scenario_1', context_2: 'case1'
+    protocol4 = Protocol.create! context: 'scenario_1', context_2: 'case2'
+
+    assert_equal "20110900001", protocol1.number
+    assert_equal "20110900001", protocol2.number
+    assert_equal "20110900002", protocol3.number
+    assert_equal "20110900001", protocol4.number
+  end
+
+  test "counter should consider lambda scope given" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, :scope_by => lambda { |o| "#{o.context}-#{o.context_2}" }
+    end
+
+    protocol1 = Protocol.create! context: 'scenario_1', context_2: 'case1'
+    protocol2 = Protocol.create! context: 'scenario_2', context_2: 'case1'
+    protocol3 = Protocol.create! context: 'scenario_1', context_2: 'case1'
+    protocol4 = Protocol.create! context: 'scenario_1', context_2: 'case2'
+
+    assert_equal "20110900001", protocol1.number
+    assert_equal "20110900001", protocol2.number
+    assert_equal "20110900002", protocol3.number
+    assert_equal "20110900001", protocol4.number
+  end
+
+
   test "rejects empty patterns" do
 
     assert_raise ArgumentError do
