@@ -1,3 +1,5 @@
+== v2.0.1
+* improving support for ActiveType 'Presenters' (thanks @Bogadon)
 == v2.0.0
 * addin the ability to dinamicaly scope the counter (thanks @emaxi)
   This will require a migration to users using the old version of the gem
