@@ -1,3 +1,6 @@
+== v2.0.0
+* addin the ability to dinamicaly scope the counter (thanks @emaxi)
+  This will require a migration to users using the old version of the gem
 == v1.0.3
 * gemspec fix to accept  Rails >4 #26, previous PR didn't fix it.
 == v1.0.2
