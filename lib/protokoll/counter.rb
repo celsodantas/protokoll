@@ -4,7 +4,6 @@ module Protokoll
   class Counter
     def self.next(object, options)
       element = Models::CustomAutoIncrement.find_or_create_by(build_attrs(object, options))
-
       element.counter = options[:start] if outdated?(element, options) || element.counter == 0
       element.counter += 1
 
@@ -30,7 +29,7 @@ module Protokoll
     end
 
     def self.outdated?(record, options)
-      Time.now.utc.strftime(update_event(options)).to_i > record.updated_at.strftime(update_event(options)).to_i
+      Time.now.utc.strftime(update_event(options)).to_i > record.updated_at.utc.strftime(update_event(options)).to_i
     end
 
     def self.update_event(options)
