@@ -29,7 +29,7 @@ module Protokoll
     end
 
     def self.outdated?(record, options)
-      Time.now.utc.strftime(update_event(options)).to_i > record.updated_at.utc.strftime(update_event(options)).to_i
+      Time.zone.now.strftime(update_event(options)).to_i > record.updated_at.strftime(update_event(options)).to_i
     end
 
     def self.update_event(options)
