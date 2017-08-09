@@ -49,6 +49,40 @@ class ProtokollTest < ActiveSupport::TestCase
     assert_equal "20110900002", protocol2.number
   end
 
+  test "timezone should not be a problem" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, pattern: "%y%m%d##"
+    end
+
+    Time.zone = 'America/New_York'
+    time = Time.local(2011, 9, 25, 9, 0, 0)
+    Timecop.travel(time)
+    protocol1 = Protocol.create
+
+    time = Time.local(2011, 9, 25, 22, 0, 0)
+    Timecop.travel(time)
+    protocol2 = Protocol.create
+
+    assert_not_equal protocol1.number, protocol2.number
+  end
+
+  test "timezone should not be a problem when the time is next day" do
+    class Protocol < ActiveRecord::Base
+      protokoll :number, pattern: "%y%m%d##"
+    end
+
+    Time.zone = 'America/New_York'
+    time = Time.local(2011, 9, 25, 9, 0, 0)
+    Timecop.travel(time)
+    protocol1 = Protocol.create
+
+    time = Time.local(2011, 9, 26, 02, 0, 0)
+    Timecop.travel(time)
+    protocol2 = Protocol.create
+
+    assert_not_equal protocol1.number, protocol2.number
+  end
+
   test "should get 201100002 for second save (format number %Y#####)" do
     class Protocol < ActiveRecord::Base
       protokoll :number, :pattern => "%Y#####"
