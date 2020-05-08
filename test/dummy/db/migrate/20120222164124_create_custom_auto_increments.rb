@@ -1,4 +1,4 @@
-class CreateCustomAutoIncrements < ActiveRecord::Migration
+class CreateCustomAutoIncrements < ActiveRecord::Migration[4.2]
   def up
     create_table :custom_auto_increments, :force => true do |t|
       t.string :counter_model_name
