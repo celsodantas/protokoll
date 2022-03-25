@@ -1,4 +1,4 @@
-class AddScopeByToCustomAutoIncrements < ActiveRecord::Migration
+class AddScopeByToCustomAutoIncrements < ActiveRecord::Migration[4.2]
   def up
     add_column :custom_auto_increments, :counter_model_scope, :string
     add_index :custom_auto_increments, [:counter_model_name, :counter_model_scope],
