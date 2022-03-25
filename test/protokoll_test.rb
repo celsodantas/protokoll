@@ -43,7 +43,7 @@ class ProtokollTest < ActiveSupport::TestCase
       protokoll :number
     end
 
-    protocol1 = Protocol.create
+    Protocol.create
     protocol2 = Protocol.create
 
     assert_equal "20110900002", protocol2.number
@@ -106,7 +106,7 @@ class ProtokollTest < ActiveSupport::TestCase
       protokoll :number, :pattern => "A##"
     end
 
-    protocol1 = Protocol.create
+    Protocol.create
     protocol2 = Protocol.create
     assert_equal "A02", protocol2.number
   end
@@ -116,8 +116,8 @@ class ProtokollTest < ActiveSupport::TestCase
       protokoll :number, :pattern => "A##"
     end
 
-    protocol1 = Protocol.create
-    protocol2 = Protocol.create
+    Protocol.create
+    Protocol.create
     protocol3 = Protocol.create
     assert_equal "A03", protocol3.number
   end
@@ -174,7 +174,7 @@ class ProtokollTest < ActiveSupport::TestCase
     end
 
     time = Time.local(2011, 9, 25, 12, 3, 0) # 2011
-    protocol1 = Protocol.create
+    Protocol.create
     time = Time.local(2012, 9, 25, 12, 3, 0) # 2012 - exactly 1 year after
     Timecop.travel(time)
 
