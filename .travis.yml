@@ -1,9 +1,0 @@
-rvm:
-  - 2.2.4
-  - 2.3.0
-
-script: bundle exec rake -f test/dummy/Rakefile db:migrate db:test:prepare; bundle exec rake
-
-notifications:
-  recipients:
-    - celsodantas@gmail.com
