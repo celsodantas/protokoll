@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_record'
 
 module Protokoll
@@ -30,18 +32,21 @@ module Protokoll
     end
 
     def self.outdated?(record, options)
-      Time.now.utc.strftime(update_event(options)).to_i > record.updated_at.strftime(update_event(options)).to_i
+      event = update_event(options)
+      return false if event.empty?
+
+      Time.now.utc.strftime(event).to_i > record.updated_at.strftime(event).to_i
     end
 
     def self.update_event(options)
       pattern = options[:pattern]
       event = String.new
 
-      event += "%Y" if pattern.include? "%y" or pattern.include? "%Y"
-      event += "%m" if pattern.include? "%m"
-      event += "%H" if pattern.include? "%H"
-      event += "%M" if pattern.include? "%M"
-      event += "%d" if pattern.include? "%d"
+      event << "%Y" if pattern.include? "%y" or pattern.include? "%Y"
+      event << "%m" if pattern.include? "%m"
+      event << "%H" if pattern.include? "%H"
+      event << "%M" if pattern.include? "%M"
+      event << "%d" if pattern.include? "%d"
       event
     end
   end

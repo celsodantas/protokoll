@@ -1,32 +1,33 @@
+# frozen_string_literal: true
 
 module Protokoll
   class Formater
     def format(number, options)
       @options = options
-      
+
       build(number)
     end
-    
-    private 
-    
+
+    private
+
     # gets the next number.
     # it prepends the prefix + counter + sufix
     # ex:
-    #   "%Y####BANK" 
+    #   "%Y####BANK"
     #   %Y => prefix (year)
     #   #### => counter (starts with 0001)
     #   BANK => sufix
-    # 
+    #
     # if we are in 2011, the first model to be saved will get "20110001BANK"
     # the next model to be saved will get "20110002BANK", "20110003BANK"...
     #
     #   number => is the counter
-    #   
-    #   next_custom_number(1) 
+    #
+    #   next_custom_number(1)
     #   => "20110001BANK"
     def build(number)
-      prefix(@options[:pattern]).to_s + 
-      counter(@options[:pattern], number).to_s + 
+      prefix(@options[:pattern]).to_s +
+      counter(@options[:pattern], number).to_s +
       sufix(@options[:pattern]).to_s
     end
 
@@ -61,12 +62,13 @@ module Protokoll
     end
 
     def expand_times(pattern)
-      pattern.sub("%y", Time.now.strftime("%y"))
-        .sub("%Y", Time.now.strftime("%Y"))
-        .sub("%d", Time.now.strftime("%d"))
-        .sub("%m", Time.now.strftime("%m"))
-        .sub("%M", Time.now.strftime("%M"))
-        .sub("%H",  Time.now.strftime("%H"))
+      pat = pattern.dup # pattern is a frozen string.
+      pat.sub!("%y", Time.now.strftime("%y"))
+      pat.sub!("%Y", Time.now.strftime("%Y"))
+      pat.sub!("%d", Time.now.strftime("%d"))
+      pat.sub!("%m", Time.now.strftime("%m"))
+      pat.sub!("%M", Time.now.strftime("%M"))
+      pat.sub("%H",  Time.now.strftime("%H"))
     end
 
     def digits_size(pattern)
@@ -75,5 +77,5 @@ module Protokoll
     end
 
 
-  end  
+  end
 end
